@@ -1,0 +1,40 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class MatrixMinor {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random rand = new Random();
+        
+        System.out.print("Введите размерность матрицы: ");
+        int size = sc.nextInt();
+        int[][] matrix = new int[size][size];
+
+        for (int i = 0; i < size; i++)
+            for (int j = 0; j < size; j++)
+                matrix[i][j] = rand.nextInt(10);
+
+        System.out.print("Выберите строку и столбец для минора: ");
+        int row = sc.nextInt(), col = sc.nextInt();
+        int[][] minor = new int[size - 1][size - 1];
+
+        int minorRow = 0, minorCol;
+        for (int i = 0; i < size; i++) {
+            if (i == row) continue;
+            minorCol = 0;
+            for (int j = 0; j < size; j++) {
+                if (j == col) continue;
+                minor[minorRow][minorCol++] = matrix[i][j];
+            }
+            minorRow++;
+        }
+
+        System.out.println("Минор:");
+        for (int[] r : minor) {
+            for (int val : r) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+}
